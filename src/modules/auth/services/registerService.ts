@@ -24,7 +24,7 @@ const user = await prisma.user.create({
         name: data.name,
         email: data.email,
         password: passwordHash,
-        organization:{
+        organizations:{
             create: {
                 name: data.organization
             }
