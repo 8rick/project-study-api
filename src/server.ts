@@ -6,11 +6,7 @@ const app = Fastify();
 
 app.register(authRoutes);
 
-app.get("/", async () => {
-  return { message: "API funcionando 🚀" }
-})
-
 
 app.listen({ port: 3333}).then(() => {
-    return("Server running on port http://locallhost:3333")
+    return("Server running ")
 })
