@@ -22,6 +22,7 @@ export async function loginService(data: LoginRequest) {
     user.password
   );
 
+
   if (!passwordMatch) {
     throw new Error("Invalid credentials");
   }
@@ -31,6 +32,8 @@ export async function loginService(data: LoginRequest) {
     "supersecret",
     { expiresIn: "1d" }
   );
+
+  
 
   return {
     token,
