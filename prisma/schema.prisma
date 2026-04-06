@@ -45,6 +45,7 @@ model Project {
   name           String
   description    String?
   price          Float
+  isPaid         Boolean @default(false)
   status         String
   clientId       String
   organizationId String

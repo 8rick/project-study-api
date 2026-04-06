@@ -2,13 +2,16 @@ import { FastifyRequest, FastifyReply } from "fastify";
 import { loginSchema } from "../schemas/loginSchema";
 import { loginService } from "../services/loginService";
 
-export async function loginController(
-    request: FastifyRequest,
-    reply: FastifyReply,
-) {
-    const data = loginSchema.parse(request.body);
 
-    const result = await loginService(data);
-    
-    return reply.send(result)
+export async function loginController(request, reply) {
+  const user = await loginService(request.body);
+
+  const token = await reply.jwtSign({
+    userId: user.id
+  });
+
+  return reply.send({
+    user,
+    token
+  });
 }

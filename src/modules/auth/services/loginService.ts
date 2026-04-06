@@ -22,22 +22,11 @@ export async function loginService(data: LoginRequest) {
     user.password
   );
 
+
   if (!passwordMatch) {
     throw new Error("Invalid credentials");
   }
 
-  const token = jwt.sign(
-    { userId: user.id },
-    "supersecret",
-    { expiresIn: "1d" }
-  );
 
-  return {
-    token,
-    user: {
-      id: user.id,
-      name: user.name,
-      email: user.email
-    }
-  };
+  return user;
 }
