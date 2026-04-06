@@ -10,4 +10,10 @@ export async function createProjectController(request, reply) {
   const project = await createProjectService(data, userId);
 
   return reply.status(201).send(project);
+
+  console.log(request.user);
+
 }
+
+
+
