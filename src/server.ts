@@ -4,6 +4,7 @@ import { authRoutes } from "./modules/auth/routes/authRoutes";
 import { projectsRoutes } from "./modules/projects/routes/projectsRoutes";
 import fastifyJwt from "@fastify/jwt";
 import { authMiddleware } from "./middlewares/authMiddleware";
+import { clientRoutes } from "./modules/clients/routes/clientsRoutes";
 
 
 const app = Fastify();
@@ -14,6 +15,8 @@ app.register(fastifyJwt, {
 
 app.register(authRoutes);
 app.register(projectsRoutes, { prefix: "/projects" });
+
+app.register(clientRoutes, { prefix: "/clients" });
 
 app.get("/me", { preHandler: authMiddleware }, async () => {
   return { message: "Usuário autenticado" };
