@@ -1,6 +1,7 @@
 import { prisma } from "../../../database/prisma";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { id } from "zod/locales";
 
 interface LoginRequest {
   email: string;
@@ -27,6 +28,23 @@ export async function loginService(data: LoginRequest) {
     throw new Error("Invalid credentials");
   }
 
+  const token = jwt.sign(
+    {
+      userId: user.id
+    }, 
+    process.env.JWT_SECRET || "supersecret",
 
-  return user;
+    {
+      expiresIn: "7d"
+    }
+  );
+
+  return {
+  user:{
+    id: user.id,
+    name: user.name,
+    email: user.email,
+  },
+  token
+  };
 }
