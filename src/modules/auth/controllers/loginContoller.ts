@@ -4,14 +4,9 @@ import { loginService } from "../services/loginService";
 
 
 export async function loginController(request, reply) {
-  const user = await loginService(request.body);
+  const result = await loginService(request.body);
 
-  const token = await reply.jwtSign({
-    userId: user.id
-  });
-
-  return reply.send({
-    user,
-    token
-  });
+  return reply.send(
+    result,
+    );
 }
